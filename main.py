@@ -135,7 +135,7 @@ def main():
             t_end = time.time()
 
             # check if 30 seconds passed rather than 60; more results this way, giving more accurate data
-            if (t_end - t_temp) > 15:
+            if (t_end - t_temp) > 30:
                 t_temp = time.time()
                 click_sum += key_count
                 # as a result of halving check time, saving doubled apm
