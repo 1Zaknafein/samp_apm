@@ -139,7 +139,7 @@ def main():
                 t_temp = time.time()
                 click_sum += key_count
                 # as a result of halving check time, saving doubled apm
-                results.append(key_count*4)
+                results.append(key_count*2)
                 key_count = 0
 
         #reducing loop frequency for efficiency, increase number of seconds if lagging
