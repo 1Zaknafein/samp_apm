@@ -13,7 +13,7 @@ Libraries pynput, numpy and matplotlib are required to run this script.
 
 
 ## How it works
-Upon pressing the start key, the script will listen for specific keys used in SAMP gameplay; mainly WSAD, Q, E, C and spacebar keys, along with mouse clicks and increment counter whenever such key was detected to be pressed. Every 30 seconds the number of registered keys is then added to a list of results, which will then be used to present the data.
+Upon pressing the start key, the script will listen for specific keys used in SAMP gameplay; mainly WSAD, Q, E, C and spacebar keys, along with mouse clicks in order to increment a counter whenever such key was detected to be pressed. Every 30 seconds the number of registered keys is then added to a list of results, which will then be used to present the data.
 
 As of current version
 - Pressing ESC or opening chat ('T' key)  effectively pauses the counter to provide much more accurate results, as only measuring gameplay is desired.
