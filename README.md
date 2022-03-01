@@ -22,4 +22,4 @@ As of current version
 
 
 ## Note
-Technically it is a keylogger (as its listening for keyboard and mouse input), therefore it might be flagged by AV; nothing to worry about though
+Technically it is a keylogger (as its listening for keyboard and mouse input), therefore it might be flagged by AV
