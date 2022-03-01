@@ -22,14 +22,14 @@ As of current version
 
 ## Example results
 
-#### run time = 0:23:06
-#### key presses = 10750
-#### average apm = 477.8
-#### average actions per second = 8.0
+#### run time = 0:02:58
+#### key presses = 1416
+#### average apm = 523.5
+#### highest apm = 526
+#### average actions per second = 8.7
+#### highest actions per second = 11.8
 
-
-
-![test_graph](https://user-images.githubusercontent.com/98032843/156205545-222a9cef-8f6a-41ab-8f70-6495d5356c0a.png)
+![test_graph](https://user-images.githubusercontent.com/98032843/156214599-952d73b1-9b8e-4632-b1ec-a7a40600a8a1.png)
 
 
 ## Note
