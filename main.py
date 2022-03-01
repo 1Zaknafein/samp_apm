@@ -200,6 +200,7 @@ def main():
         plt.plot(xpoints, ypoints)
         plt.xlabel("Time (s)")
         plt.ylabel("Clicks in 5 seconds time")
+        plt.title("Action key frequency during SA:MP gameplay")
         # plt.grid(True)
         plt.savefig('test_graph.png', bbox_inches='tight')
         # plt.show()
@@ -212,6 +213,7 @@ def main():
             plt.plot(xpoints, ypoints)
             plt.xlabel("Time (mins)")
             plt.ylabel("APM")
+            plt.title("Actions per minute during SA:MP gameplay")
             plt.savefig('test_apm_graph.png', bbox_inches='tight')
 
         apm_avg = round(sum(results_apm) / len(results_apm), 1)
@@ -220,8 +222,7 @@ def main():
         aps = round(apm_avg / 60, 1)
         aps_highest = round((max(results) / 5), 1)
 
-        _ = ["Test results:\n",
-             f"run time = {convert_time(elapsed)}\n",
+        _ = ["run time = {convert_time(elapsed)}\n",
              f"key presses = {click_sum}\n",
              f"average apm = {apm_avg}\n",
              f"highest apm = {apm_highest}\n",
