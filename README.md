@@ -20,6 +20,17 @@ As of current version
 - Pressing ESC while game is paused (in menu or typing) will unpause the counter, as well as hitting Enter to send the message in chat.
 - Holding down a key is prevented from breaking the results, done by checking how much time has passed since the same key was pressed.
 
+## Example results
+
+#### run time = 0:23:06
+#### key presses = 10750
+#### average apm = 477.8
+#### average actions per second = 8.0
+
+
+
+![test_graph](https://user-images.githubusercontent.com/98032843/156205545-222a9cef-8f6a-41ab-8f70-6495d5356c0a.png)
+
 
 ## Note
 Technically it is a keylogger (as its listening for keyboard and mouse input), therefore it might be flagged by AV
