@@ -1,0 +1,7 @@
+Test results:
+run time = 0:02:58
+key presses = 1416
+average apm = 523.5
+highest apm = 526
+average actions per second = 8.7
+highest actions per second = 11.8

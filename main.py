@@ -102,6 +102,23 @@ def on_click(x, y, button, pressed):
             key_count += 1
 
 
+def start_listening(k, m):
+    k.start()
+    m.start()
+
+
+def stop_listening(k, m):
+    k.stop()
+    m.stop()
+
+
+def convert_time(t):
+    t = round(t)
+    minute, sec = divmod(t, 60)
+    hour, minute = divmod(minute, 60)
+    return "%d:%02d:%02d" % (hour, minute, sec)
+
+
 def main():
     global key_count
 
@@ -127,24 +144,47 @@ def main():
                 t_start = time.time()
             t_end = time.time()
 
-            # check if 30 seconds passed rather than 60; more results this way, giving more accurate data
-            if (t_end - t_temp) > 30:
+            # check if 1 second passed rather than 60; more results this way, giving more accurate data
+            if (t_end - t_temp) > 4.8:
                 t_temp = time.time()
                 click_sum += key_count
                 # as a result of halving check time, saving doubled apm
-                results.append(key_count*2)
+                results.append(key_count)
                 key_count = 0
 
-        #reducing loop frequency for efficiency, increase number of seconds if lagging
+        # reducing loop frequency for efficiency, increase number of seconds if lagging
         # however the more delay the worse accuracy of results,
-        # e.g. can result in checking 5 seconds after normal time, giving 5 seconds worth of clicks more
-        time.sleep(2.5)
+        # e.g. can result in checking second after normal time, giving a second worth of clicks more
+        time.sleep(1)
 
     elapsed = t_end - t_start
     stop_listening(k=key_listener, m=mouse_listener)
 
     # only proceed if got anything to work with
     if len(results) > 2:
+
+        # since getting measurements every 5 seconds, it will take 12 measurements to show rpm
+
+        results_apm = []
+
+        c = 0
+        clicks = 0
+        for i in results:
+            if c < 13:
+                clicks += i
+                if c == 12:
+                    results_apm.append(clicks)  # sum of 12 results will give APM
+                    clicks = 0
+                c += 1
+            else:
+                c = 0
+
+        # need to account for last set of 12 clicks, as it may not be complete
+        length_check = len(results_apm) % len(results)
+
+        if length_check != (len(results)//12):
+            results_apm = results_apm[:-1]
+
 
         # need an array for 'time' with the same size as 'results' array
         # using np.arange to populate list to correct size
@@ -158,20 +198,25 @@ def main():
 
         # plot graph
         plt.plot(xpoints, ypoints)
-        plt.xlabel("time")
-        plt.ylabel("APM")
+        plt.xlabel("time (s)")
+        plt.ylabel("Clicks in 5 seconds time")
         # plt.grid(True)
         plt.savefig('test_graph.png', bbox_inches='tight')
         # plt.show()
 
-        apm_avg = round(sum(results) / len(results), 1)
+        apm_avg = round(sum(results_apm) / len(results_apm), 1)
+        apm_highest = max(results_apm)
+
         aps = round(apm_avg / 60, 1)
+        aps_highest = round((max(results) / 5), 1)
 
         _ = ["Test results:\n",
              f"run time = {convert_time(elapsed)}\n",
              f"key presses = {click_sum}\n",
              f"average apm = {apm_avg}\n",
-             f"average actions per second = {aps}"]
+             f"highest apm = {apm_highest}\n",
+             f"average actions per second = {aps}\n",
+             f"highest actions per second = {aps_highest}"]
 
         results_file = open("test_results.txt", "w")
         results_file.writelines(_)
@@ -180,25 +225,14 @@ def main():
 
     else:
         print("did not register enough key presses to display results\n"
-              "let it run for abit first!")
-
-
-def start_listening(k, m):
-    k.start()
-    m.start()
-
-
-def stop_listening(k, m):
-    k.stop()
-    m.stop()
-
-
-def convert_time(t):
-    t = round(t)
-    minute, sec = divmod(t, 60)
-    hour, minute = divmod(minute, 60)
-    return "%d:%02d:%02d" % (hour, minute, sec)
+              "let it run a while first!")
 
 
 if __name__ == '__main__':
     main()
+
+
+
+
+
+
