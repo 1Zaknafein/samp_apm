@@ -28,7 +28,8 @@ def on_press(key):
     global click_time_last
     global click_time_first
 
-    # check to see how much time passed since last press; used to fix issue with holding a key down being recorded as multiple key presses
+    # check to see how much time passed since last press;
+    # used to fix issue with holding a key down being recorded as multiple key presses
     click_time_last = time.time()
     elapsed = click_time_last - click_time_first
     click_time_first = time.time()
@@ -43,7 +44,6 @@ def on_press(key):
 
         if key == stop_key or key == keyboard.Key.cmd_r:
             print("stopped listening")
-            # save results and end
             global finished
             finished = True
             return
@@ -52,13 +52,9 @@ def on_press(key):
         elif key == keyboard.Key.esc:
             if chatOpen:
                 chatOpen = False
-                #print("closed chat")
             else:
                 paused = not paused
-                #if paused:
-                    #print("paused")
-                #else:
-                    #print("unpaused")
+
             last_pressed = keyboard.Key.esc
             return
 
@@ -83,7 +79,6 @@ def on_press(key):
 
                 # check if chat was opened
                 elif key.char == 't':
-                    #print("opened chat")
                     chatOpen = True
 
         except AttributeError:
@@ -98,7 +93,6 @@ def on_press(key):
             started = True
             return
 
-
 # mouse listener, check if right or left click, when listening has started by using start key (f2 default), not paused and not chatting (esc,t)
 def on_click(x, y, button, pressed):
     if started and not paused and not chatOpen:
@@ -110,7 +104,6 @@ def on_click(x, y, button, pressed):
 
 def main():
     global key_count
-    # in seconds
 
     key_listener = keyboard.Listener(on_press=on_press)
     mouse_listener = mouse.Listener(on_click=on_click)
@@ -153,30 +146,14 @@ def main():
     # only proceed if got anything to work with
     if len(results) > 2:
 
-
         # need an array for 'time' with the same size as 'results' array
         # using np.arange to populate list to correct size
-
-
-        y = []
-        for i in range(round(elapsed)):
-            y.append(i)
-
-
 
         import matplotlib.pyplot as plt
         import numpy as np
 
         _ = round(elapsed)
         xpoints = np.arange(1, _, _ / len(results))
-
-
-        print(len(results))
-        print(xpoints.size)
-        # print("total key presses in ~", round(elapsed, 2), "s time:", click_sum)
-
-        # numpy array for pyplot
-        #xpoints = np.array(y)
         ypoints = np.array(results)
 
         # plot graph
@@ -198,9 +175,7 @@ def main():
 
         results_file = open("test_results.txt", "w")
         results_file.writelines(_)
-
         results_file.close()
-
         print("results saved")
 
     else:
