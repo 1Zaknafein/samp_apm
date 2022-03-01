@@ -198,11 +198,21 @@ def main():
 
         # plot graph
         plt.plot(xpoints, ypoints)
-        plt.xlabel("time (s)")
+        plt.xlabel("Time (s)")
         plt.ylabel("Clicks in 5 seconds time")
         # plt.grid(True)
         plt.savefig('test_graph.png', bbox_inches='tight')
         # plt.show()
+
+        # for larger amounts of data plot and save APM graph as well
+        if len(results) > 5:
+            xpoints = np.array(results)
+            ypoints = np.arange(1, xpoints.size)
+
+            plt.plot(xpoints, ypoints)
+            plt.xlabel("Time (mins)")
+            plt.ylabel("APM")
+            plt.savefig('test_apm_graph.png', bbox_inches='tight')
 
         apm_avg = round(sum(results_apm) / len(results_apm), 1)
         apm_highest = max(results_apm)
